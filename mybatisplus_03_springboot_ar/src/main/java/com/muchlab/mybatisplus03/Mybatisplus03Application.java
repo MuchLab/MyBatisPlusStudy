@@ -6,10 +6,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 @MapperScan(basePackages = {"com.muchlab.mybatisplus03.mapper"})
-public class Mybatisplus02Application {
+public class Mybatisplus03Application {
 
     public static void main(String[] args) {
-        SpringApplication.run(Mybatisplus02Application.class, args);
+        SpringApplication.run(Mybatisplus03Application.class, args);
     }
 
 }

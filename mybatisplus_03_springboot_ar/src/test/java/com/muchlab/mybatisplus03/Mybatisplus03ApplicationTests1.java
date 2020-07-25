@@ -63,7 +63,6 @@ class Mybatisplus03ApplicationTests1 {
             log.info("User:"+record);
         }
     }
-
     private static void selectBetween(UserMapper userMapper, int i, int i1) {
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         queryWrapper.between("id", i, i1);
@@ -72,14 +71,12 @@ class Mybatisplus03ApplicationTests1 {
             log.info("User:"+user);
         }
     }
-
     private static void deleteByMap(UserMapper userMapper, Map<String, Object> map) {
         final int i = userMapper.deleteByMap(map);
         if (i>0){
             log.info("Delete:"+i);
         }
     }
-
     private static void deleteBatch(UserMapper userMapper, Integer... list) {
         Collection<Serializable> collection = new ArrayList<>();
         Collections.addAll(collection, list);
@@ -88,13 +85,11 @@ class Mybatisplus03ApplicationTests1 {
             log.info("Delete:"+i);
         }
     }
-
     private static void selectById(UserMapper userMapper) {
         userMapper.selectById(1);
         final User user = userMapper.selectById(1);
         log.info("User:"+user);
     }
-
     private static void selectAll(UserMapper userMapper) {
         QueryWrapper queryWrapper = new QueryWrapper();
         queryWrapper.select("id", "name", "address", "birth");
@@ -103,21 +98,18 @@ class Mybatisplus03ApplicationTests1 {
             log.info("User:"+user);
         }
     }
-
     private static void deleteUserById(UserMapper userMapper, Integer id) {
         final int i = userMapper.deleteById(id);
         if (i>0){
             log.info("Delete:"+i);
         }
     }
-
     private static void insertUser(UserMapper userMapper, User user) {
         final int insert = userMapper.insert(user);
         if (insert>0){
             log.info("Insert:"+insert);
         }
     }
-
     private static void updateEqual(UserMapper userMapper, String column, String value) {
         UpdateWrapper<User> updateWrapper = new UpdateWrapper<>();
         updateWrapper.eq(column, value);
@@ -126,7 +118,6 @@ class Mybatisplus03ApplicationTests1 {
             log.info("Update:"+i);
         }
     }
-
     private static void updateBetween(UserMapper userMapper, Integer val1, Integer val2) {
         UpdateWrapper<User> updateWrapper = new UpdateWrapper<>();
         updateWrapper.between("id", val1, val2);
@@ -135,7 +126,6 @@ class Mybatisplus03ApplicationTests1 {
             log.info("Update:"+i);
         }
     }
-
     private static void updateUserById(UserMapper userMapper, Integer id, String name) {
         final User user = userMapper.selectById(id);
         user.setName(name);
@@ -144,5 +134,4 @@ class Mybatisplus03ApplicationTests1 {
             log.info("Update:"+i);
         }
     }
-
 }

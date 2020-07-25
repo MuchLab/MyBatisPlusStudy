@@ -26,6 +26,8 @@ public class User extends Model<User> implements Serializable {
     private String name;
     private String address;
     private Date birth;
+    @TableField(exist = false)
+    private String sex;
 
     public User(String name, String address, Date birth) {
         this.name = name;
