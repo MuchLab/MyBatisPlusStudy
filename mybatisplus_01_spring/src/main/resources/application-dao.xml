@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+	   http://www.springframework.org/schema/beans/spring-beans.xsd
+	   http://www.springframework.org/schema/context
+	   https://www.springframework.org/schema/context/spring-context.xsd">
+	<!-- dao层的配置：核心是要产生 Mapper代理类对象 1.引入数据库配置信息 2.数据源配置 3.SqlSessionFactory 
+		4.产生Mapper接口的代理类对象 -->
+	<!-- 1.引入数据库配置信息 -->
+	<context:property-placeholder
+		location="classpath:db.properties" system-properties-mode="FALLBACK" />
+	<!--2.数据源配置 -->
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${driver}"></property>
+		<property name="url" value="${url}"></property>
+		<property name="username" value="${user}"></property>
+		<property name="password" value="${password}"></property>
+	</bean>
+
+	<!-- 3.SqlSessionFactory -->
+	<bean id="sqlSessionFactory"
+		class="com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		
+		<property name="globalConfig" ref="globalConfig"></property>
+		<!-- 加载xxMapper.xml -->
+<!--		<property name="mapperLocations">-->
+<!--			<array>-->
+<!--				<value>classpath:mapper/*Mapper.xml</value>-->
+<!--			</array>-->
+<!--		</property>-->
+		<!-- 配置分页插件 -->
+		<property name="plugins">
+			<array>
+				<bean class="com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor">
+				</bean>
+			</array>
+		</property>
+	</bean>
+	<!-- 声明全局配置 -->
+	<bean id="globalConfig" class="com.baomidou.mybatisplus.core.config.GlobalConfig">
+		<!-- 指定主键自动增长类型 -->
+		<property name="dbConfig" ref="dbConfig"></property>
+	</bean>
+	<bean id="dbConfig" class="com.baomidou.mybatisplus.core.config.GlobalConfig.DbConfig">
+		<property name="idType" value="AUTO"></property>
+	</bean>
+	
+	<!-- 4.产生Mapper接口的代理类对象 -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<!-- 需要生成代理类对象的mapper接口包 -->
+		<property name="basePackage"
+			value="com.muchlab.mybatisplus01.mapper"></property>
+		<!-- sqlSessionFactory 的name 用于为代理类中生成SqlSession -->
+		<property name="sqlSessionFactoryBeanName"
+			value="sqlSessionFactory"></property>
+	</bean>
+
+
+</beans>
