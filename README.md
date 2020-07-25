@@ -1,2 +1,2 @@
 # MyBatisPlusStudy
-MyBatisPlus学习代码
+学习MyBatisPlus的代码
